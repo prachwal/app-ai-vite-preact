@@ -1,6 +1,5 @@
 {
   "name": "my-preact-app",
-  "private": true,
   "version": "0.1.0",
   "type": "module",
   "scripts": {
@@ -18,6 +17,10 @@
     "build:check": "npm run type-check && npm run build",
     "test:coverage": "vitest run --coverage && echo 'Coverage report generated in public/docs/coverage/'",
     "docs:all": "npm run docs:api && npm run test:coverage",
+    "template:build": "node package-scripts/build-template.js",
+    "template:clean": "rm -rf template",
+    "template:test": "npm run template:build && node bin/create-preact-storybook-template.js test-template && cd test-template && npm install && npm run test:run",
+    "release:prepare": "npm run template:build && npm run test:run && npm run type-check",
     "dev:host": "vite --host",
     "build:analyze": "npm run build && npx vite-bundle-analyzer dist",
     "storybook": "storybook dev -p 6006",
@@ -55,5 +58,6 @@
     "typescript": "~5.8.3",
     "vite": "^7.0.4",
     "vitest": "3.2.4"
-  }
+  },
+  "private": true
 }

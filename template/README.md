@@ -11,7 +11,6 @@ A modern Preact application with TypeScript, Tailwind CSS, Storybook, and compre
 - 🧪 **Vitest** - Fast unit testing with coverage reports
 - 📖 **TypeDoc** - Automatic API documentation generation
 - ⚡ **Vite** - Fast build tool and development server
-- 🔍 **ESLint & Prettier** - Code quality and formatting
 
 ## Quick Start
 
@@ -57,18 +56,18 @@ npm run dev
 
 ```
 src/
-├── components/     # UI components (presentation only)
+├── components/     # UI components (.tsx) - presentation only
 │   ├── Button.tsx
 │   ├── Card.tsx
 │   └── index.ts
-├── hooks/         # Custom hooks (business logic)
-├── services/      # API and business logic
-├── utils/         # Pure utility functions
-├── stories/       # Storybook stories
-├── test/          # Test files
+├── hooks/         # Custom hooks (.ts) - state logic
+├── services/      # Business logic (.ts) - API calls
+├── utils/         # Pure utility functions (.ts)
+├── stories/       # Storybook stories (.stories.tsx)
+├── test/          # Test files (.test.ts/.test.tsx)
 ├── assets/        # Static assets
 ├── app.tsx        # Main app component
-└── main.tsx       # App entry point
+└── main.tsx       # Application entry point
 ```
 
 ## Coding Guidelines
