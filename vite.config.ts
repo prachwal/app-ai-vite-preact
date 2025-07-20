@@ -20,6 +20,11 @@ export default defineConfig({
         '**/*.test.ts',
         '**/*.test.tsx',
         
+        // Storybook files (nie wymagają testów jednostkowych)
+        '**/*.stories.ts',
+        '**/*.stories.tsx',
+        'src/stories/**',
+        
         // Build artifacts
         'dist/**',
         'public/**',

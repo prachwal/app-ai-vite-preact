@@ -6,7 +6,11 @@ applyTo: '**'
 
 ## Podejście do kodowania
 1. Używaj komponentów funkcyjnych i nowoczesnych mechanizmów zarządzania stanem.
-2. Oddzielaj logikę biznesową od prezentacji (logika w osobnych plikach, komponenty tylko prezentacja i obsługa interakcji).
+2. **SEPARACJA LOGIKI I PREZENTACJI**: 
+   - Komponenty UI (.tsx) powinny zawierać TYLKO prezentację i obsługę interakcji
+   - Logika biznesowa MUSI być w osobnych plikach (.ts): services/, hooks/, utils/
+   - Żadna logika biznesowa nie może być bezpośrednio w komponentach
+   - Komponenty importują i używają gotowej logiki z plików .ts
 3. Komponenty powinny być małe i mieć jedną odpowiedzialność.
 4. Definiuj ścisłe interfejsy typów dla danych i odpowiedzi API.
 5. Centralizuj interakcje z API w jednym miejscu (np. `services/api.ts`).
@@ -49,21 +53,54 @@ applyTo: '**'
 public/
 src/
   assets/
-  components/
+  components/          # Komponenty UI (.tsx) - TYLKO prezentacja
   layouts/
   pages/
-  services/
-  hooks/
-  utils/
+  services/           # Logika biznesowa (.ts) - API, operacje
+  hooks/              # Custom hooks (.ts) - logika stanu
+  utils/              # Funkcje pomocnicze (.ts) - pure functions
   styles/
+  stories/            # Pliki .stories.tsx dla Storybook
+  test/               # Pliki .test.ts/.test.tsx
   main entry point
 ```
 
 ## Jakość i konwencje
 - Lintowanie i formatowanie kodu.
-- Testy jednostkowe i integracyjne.
+- **TESTY JEDNOSTKOWE**: 
+  - Każdy plik .ts MUSI mieć odpowiadający plik .test.ts z testami pokrywającymi 100% funkcjonalności
+  - Testy muszą sprawdzać wszystkie ścieżki kodu, edge cases i obsługę błędów
+  - Używaj describe/it/expect do strukturyzowania testów
+  - Mockuj zewnętrzne zależności
+- **TESTY INTEGRACYJNE**: Komponenty .tsx testuj z @testing-library/preact
 - Konwencjonalne commity.
 - Dokumentacja kodu (JSDoc/TSDoc).
+
+## Storybook dla komponentów
+- **KAŻDY KOMPONENT MUSI MIEĆ PLIK .stories.tsx**:
+  - Lokalizacja: `src/stories/NazwaKomponentu.stories.tsx`
+  - Dokumentuj wszystkie props komponentu
+  - Utwórz stories dla wszystkich wariantów (default, różne stany, rozmiary)
+  - Dodaj interaktywne controls dla wszystkich props
+  - Użyj tagów ['autodocs'] dla automatycznej dokumentacji
+  - Przykłady użycia w różnych scenariuszach
+- **Struktura stories**:
+  ```tsx
+  import { ComponentName } from '../components/ComponentName';
+  
+  export default {
+    title: 'Design System/ComponentName',
+    component: ComponentName,
+    tags: ['autodocs'],
+    argTypes: {
+      // definicje controls dla wszystkich props
+    },
+  };
+  
+  export const Default = {};
+  export const Variant1 = { args: { ... } };
+  // więcej wariantów
+  ```
 
 ## Automatyczna dokumentacja
 - Skanuj folder `src/` w poszukiwaniu plików `.ts` i `.tsx`.
