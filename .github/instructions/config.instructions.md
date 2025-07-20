@@ -72,28 +72,61 @@ src/
 - Eksportuj interfejsy używane przez eksportowane symbole.
 - Sprawdzaj ostrzeżenia narzędzi dokumentujących.
 
-### Konfiguracja TypeDoc i rozwiązywanie problemów
-- Plik `typedoc.json` musi zawierać sekcję `blockTags` z niestandardowymi tagami JSDoc:
+### Konfiguracja TypeDoc i TSDoc - rozwiązywanie problemów
+
+#### Struktura plików konfiguracyjnych
+- **`typedoc.json`** - podstawowa konfiguracja TypeDoc:
   ```json
   {
-    "blockTags": [
-      "@fileoverview",
-      "@param",
-      "@returns", 
-      "@throws",
-      "@example",
-      "@see",
-      "@since",
-      "@deprecated",
-      "@internal",
-      "@override",
-      "@virtual",
-      "@readonly",
-      "@packageDocumentation"
-    ]
+    "entryPoints": ["src"],
+    "entryPointStrategy": "expand",
+    "out": "public/docs/api",
+    "gitRevision": "main",
+    "gitRemote": "origin",
+    "tsconfig": "./tsconfig.app.json"
   }
   ```
-- Wszystkie interfejsy używane przez eksportowane symbole MUSZĄ być eksportowane z `export interface`.
-- Przykłady interfejsów wymagających eksportu: props komponentów, interfejsy w metodach klas, typy parametrów i kontekstów.
-- Po każdym uruchomieniu generowania dokumentacji sprawdzaj ostrzeżenia i poprawiaj eksporty interfejsów.
-- Używaj domyślnej gałęzi `master` (`gitRevision: "master"` w typedoc.json).
+- **`tsdoc.json`** - konfiguracja tagów TSDoc:
+  ```json
+  {
+    "$schema": "https://developer.microsoft.com/json-schemas/tsdoc/v0/tsdoc.schema.json",
+    "tagDefinitions": [
+      {
+        "tagName": "@fileoverview",
+        "syntaxKind": "modifier"
+      },
+      {
+        "tagName": "@packageDocumentation", 
+        "syntaxKind": "modifier"
+      },
+      {
+        "tagName": "@since",
+        "syntaxKind": "modifier"
+      }
+    ],
+    "supportForTags": {
+      "@fileoverview": true,
+      "@packageDocumentation": true,
+      "@param": true,
+      "@returns": true,
+      "@throws": true,
+      "@example": true,
+      "@see": true,
+      "@since": true,
+      "@deprecated": true,
+      "@internal": true,
+      "@override": true,
+      "@virtual": true,
+      "@readonly": true
+    }
+  }
+  ```
+
+#### Rozwiązywanie typowych problemów
+- **Ostrzeżenie "blockTags overwritten"**: NIE definiuj `blockTags` w `typedoc.json` - używaj tylko `tsdoc.json`
+- **"Unknown block tag @since"**: Dodaj definicję tagu w `tsdoc.json` w sekcji `tagDefinitions`
+- **"Invalid git remote"**: Zainicjalizuj repozytorium git lub ustaw `gitRevision: null`
+- **Wszystkie interfejsy używane przez eksportowane symbole MUSZĄ być eksportowane** z `export interface`
+- **Przykłady interfejsów wymagających eksportu**: props komponentów, interfejsy w metodach klas, typy parametrów i kontekstów
+- **Po każdym uruchomieniu dokumentacji sprawdzaj ostrzeżenia** i poprawiaj eksporty interfejsów
+- **Używaj domyślnej gałęzi `main`** (`gitRevision: "main"` w typedoc.json)
