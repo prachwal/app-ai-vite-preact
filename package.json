@@ -11,7 +11,15 @@
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:run": "vitest run",
-    "docs:dev": "npm run docs:api && vite --open /docs/api/index.html"
+    "docs:dev": "npm run docs:api && vite --open /docs/api/index.html",
+    "type-check": "tsc --noEmit",
+    "lint": "tsc --noEmit && echo 'Type checking passed!'",
+    "clean": "rm -rf dist public/docs/api public/docs/coverage node_modules/.cache",
+    "build:check": "npm run type-check && npm run build",
+    "test:coverage": "vitest run --coverage && echo 'Coverage report generated in public/docs/coverage/'",
+    "docs:all": "npm run docs:api && npm run test:coverage",
+    "dev:host": "vite --host",
+    "build:analyze": "npm run build && npx vite-bundle-analyzer dist"
   },
   "dependencies": {
     "preact": "^10.26.9"
@@ -22,6 +30,7 @@
     "@preact/preset-vite": "^2.10.2",
     "@testing-library/jest-dom": "6.6.3",
     "@testing-library/preact": "3.2.4",
+    "@vitest/coverage-v8": "3.2.4",
     "@vitest/ui": "3.2.4",
     "jsdom": "26.1.0",
     "tsdoc": "^0.0.4",
