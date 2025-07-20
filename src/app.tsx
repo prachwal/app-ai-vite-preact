@@ -1,43 +1,32 @@
 import { useState } from 'preact/hooks'
-import preactLogo from './assets/preact.svg'
-import viteLogo from '/vite.svg'
-import './app.css'
 
 export function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} class="logo" alt="Vite logo" />
-        </a>
-        <a href="https://preactjs.com" target="_blank">
-          <img src={preactLogo} class="logo preact" alt="Preact logo" />
-        </a>
-      </div>
-      <h1>Vite + Preact</h1>
-      <div class="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/app.tsx</code> and save to test HMR
+    <div class="min-h-screen bg-gray-100 flex items-center justify-center">
+      <div class="bg-white p-8 rounded-lg shadow-lg text-center">
+        <h1 class="text-3xl font-bold text-gray-800 mb-4">
+          Preact + Tailwind CSS
+        </h1>
+        <p class="text-gray-600 mb-6">
+          Count: <span class="font-semibold text-blue-600">{count}</span>
         </p>
+        <div class="space-x-4">
+          <button
+            class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded transition-colors"
+            onClick={() => setCount(count + 1)}
+          >
+            Increment
+          </button>
+          <button
+            class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded transition-colors"
+            onClick={() => setCount(0)}
+          >
+            Reset
+          </button>
+        </div>
       </div>
-      <p>
-        Check out{' '}
-        <a
-          href="https://preactjs.com/guide/v10/getting-started#create-a-vite-powered-preact-app"
-          target="_blank"
-        >
-          create-preact
-        </a>
-        , the official Preact + Vite starter
-      </p>
-      <p class="read-the-docs">
-        Click on the Vite and Preact logos to learn more
-      </p>
-    </>
+    </div>
   )
 }
