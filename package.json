@@ -14,20 +14,28 @@
     "docs:dev": "npm run docs:api && vite --open /docs/api/index.html",
     "type-check": "tsc --noEmit",
     "lint": "tsc --noEmit && echo 'Type checking passed!'",
-    "clean": "rm -rf dist public/docs/api public/docs/coverage node_modules/.cache",
+    "clean": "rm -rf dist public/docs/api public/docs/coverage node_modules/.cache storybook-static",
     "build:check": "npm run type-check && npm run build",
     "test:coverage": "vitest run --coverage && echo 'Coverage report generated in public/docs/coverage/'",
     "docs:all": "npm run docs:api && npm run test:coverage",
     "dev:host": "vite --host",
-    "build:analyze": "npm run build && npx vite-bundle-analyzer dist"
+    "build:analyze": "npm run build && npx vite-bundle-analyzer dist",
+    "storybook": "storybook dev -p 6006",
+    "storybook:build": "storybook build",
+    "storybook:serve": "npx http-server storybook-static -p 6007 -o",
+    "docs:storybook": "npm run storybook:build && npm run storybook:serve"
   },
   "dependencies": {
     "preact": "^10.26.9"
   },
   "devDependencies": {
+    "@chromatic-com/storybook": "4.0.1",
     "@microsoft/tsdoc": "0.15.1",
     "@microsoft/tsdoc-config": "0.17.1",
     "@preact/preset-vite": "^2.10.2",
+    "@storybook/addon-a11y": "9.0.17",
+    "@storybook/addon-docs": "9.0.17",
+    "@storybook/preact-vite": "9.0.17",
     "@tailwindcss/aspect-ratio": "0.4.2",
     "@tailwindcss/forms": "0.5.10",
     "@tailwindcss/postcss": "4.1.11",
@@ -40,6 +48,7 @@
     "jsdom": "26.1.0",
     "postcss": "8.5.6",
     "prettier-plugin-tailwindcss": "0.6.14",
+    "storybook": "9.0.17",
     "tailwindcss": "4.1.11",
     "tsdoc": "^0.0.4",
     "typedoc": "^0.28.7",
