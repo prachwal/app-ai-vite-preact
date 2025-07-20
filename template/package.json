@@ -1,33 +1,8 @@
 {
-  "name": "create-preact-storybook-template",
-  "version": "1.0.4",
-  "description": "A modern Preact template with Storybook, TypeScript, Tailwind CSS, Vitest, and TypeDoc",
-  "keywords": [
-    "preact",
-    "storybook",
-    "typescript",
-    "tailwind",
-    "vitest",
-    "template",
-    "vite"
-  ],
-  "author": "prachwal",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/prachwal/app-ai-vite-preact.git"
-  },
-  "homepage": "https://github.com/prachwal/app-ai-vite-preact#readme",
-  "bugs": {
-    "url": "https://github.com/prachwal/app-ai-vite-preact/issues"
-  },
+  "name": "my-preact-app",
+  "private": true,
+  "version": "0.1.0",
   "type": "module",
-  "bin": "./bin/create-preact-storybook-template.js",
-  "files": [
-    "template",
-    "bin",
-    "README.md"
-  ],
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

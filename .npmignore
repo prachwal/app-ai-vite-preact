@@ -1,0 +1,46 @@
+# Development files
+src/
+public/
+docs/
+storybook-static/
+.storybook/
+
+# Config files
+*.config.js
+*.config.ts
+tsconfig*.json
+.prettierrc
+.npmrc
+index.html
+
+# Development dependencies
+node_modules/
+
+# Git and GitHub
+.git/
+.github/
+
+# Documentation and tests (keep only template)
+*.test.*
+*.stories.*
+!template/**
+!template/.gitignore
+!template/.storybook/**
+
+# Build artifacts  
+dist/
+coverage/
+.cache/
+.vite/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
